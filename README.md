@@ -3,7 +3,7 @@
 A tool class, to symlink modules out of the `node_modules` to a `lib`
 folder to use them in web apps as native es6 modules without transpiling.
 
-Mainly used as `postinstall.js`. 
+Mainly used in `postinstall.js`. 
 
 It works in these plain vanilla es6 module based apps, 
 which are not transpiled or compiled:
