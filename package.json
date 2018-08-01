@@ -1,0 +1,19 @@
+{
+  "name": "es6-npm-toolkit",
+  "version": "1.0.0",
+  "description": "Tool functions to use ES6 modules as npm packages without transpiling ",
+  "main": "src/es6-npm-toolkit.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shaack/es6-npm-toolkit.git"
+  },
+  "author": "https://shaack.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shaack/es6-npm-toolkit/issues"
+  },
+  "homepage": "https://github.com/shaack/es6-npm-toolkit#readme"
+}
