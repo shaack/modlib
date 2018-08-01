@@ -29,7 +29,7 @@ module.exports = class WebModuleLinker {
             if (!fs.existsSync(fromAbsolute)) {
                 throw new Error("Error, not found: " + fromAbsolute)
             }
-            const fromRelative = "./" + path.relative(this.projectRoot + "/" + this.projectLibFolder, fromAbsolute)
+            const fromRelative = path.relative(this.projectRoot + "/" + this.projectLibFolder, fromAbsolute)
             const to = "./" + this.projectLibFolder + "/" + moduleSrc
             console.log("Linking", fromRelative, "=>", to, "(" + type + ")")
             fs.unlink(to, () => {
