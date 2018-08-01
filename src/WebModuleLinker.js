@@ -5,32 +5,38 @@
  */
 
 const path = require('path')
-
-/*
-const linker = new ModuleLinker(__dirname + "/src")
-linker.symLinkModuleSrc("cm-chessboard", "cm-chessboard)
-linker.symLinkModuleSrc("bootstrap-show-modal", "bootstrap-show-modal.js")
- */
+const fs = require('fs')
 
 module.exports = class WebModuleLinker {
 
-    constructor(projectSrcFolder) {
-        this.nodeModulesPath = path.resolve(__dirname, '..')
-        this.projectSrcFolder = projectSrcFolder
+    constructor(projectRoot, projectLibFolder = "lib") {
+        this.nodeModulesPath = path.resolve(__dirname, '../../')
+        this.projectRoot = projectRoot
+        this.projectLibFolder = projectLibFolder
+        if (!fs.existsSync(projectLibFolder)) {
+            console.log("mkdir", projectLibFolder)
+            fs.mkdirSync(projectLibFolder)
+        }
     }
 
-    symlinkModuleSrc(moduleName, moduleSrc, moduleSrcFolder = "src") {
+    symlinkModuleSrc(moduleName, moduleSrc = moduleName, moduleSrcRoot = "src") {
         let type = "dir"
         if (moduleSrc.endsWith(".js")) {
             type = "file"
         }
         try {
-            fs.unlink(this.projectSrcFolder + "/" + moduleSrc, () => {
-                console.log("Creating link from", moduleName, moduleSrcFolder, moduleSrc, "to", moduleSrc)
-                fs.symlinkSync(this.nodeModulesPath + "/", moduleSrcFolder + "/" + moduleSrc, type)
+            const fromAbsolute = this.nodeModulesPath + "/" + moduleName + "/" + moduleSrcRoot + "/" + moduleSrc
+            if (!fs.existsSync(fromAbsolute)) {
+                throw new Error("Error, not found: " + fromAbsolute)
+            }
+            const fromRelative = "./" + path.relative(this.projectRoot + "/" + this.projectLibFolder, fromAbsolute)
+            const to = "./" + this.projectLibFolder + "/" + moduleSrc
+            console.log("Linking", fromRelative, "=>", to, "(" + type + ")")
+            fs.unlink(to, () => {
+                fs.symlinkSync(fromRelative, to, type)
             })
         } catch (e) {
-            console.log(e.message)
+            console.error(e.message)
         }
     }
 
