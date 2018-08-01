@@ -2,7 +2,7 @@
   "name": "es6-npm-toolkit",
   "version": "1.0.0",
   "description": "Tool functions to use ES6 modules as npm packages without transpiling ",
-  "main": "src/es6-npm-toolkit.js",
+  "main": "src/WebModuleLinker.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

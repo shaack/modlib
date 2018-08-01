@@ -12,7 +12,7 @@ linker.symLinkModuleSrc("cm-chessboard", "cm-chessboard)
 linker.symLinkModuleSrc("bootstrap-show-modal", "bootstrap-show-modal.js")
  */
 
-export class ModuleLinker {
+export class WebModuleLinker {
 
     constructor(projectSrcFolder) {
         this.nodeModulesPath = path.resolve(__dirname, '..')
