@@ -1,5 +1,5 @@
 {
-  "name": "web-module-linker",
+  "name": "web-module-curator",
   "version": "1.0.5",
   "description": "Tool functions to use ES6 modules as npm packages without transpiling ",
   "main": "src/WebModuleCurator.js",
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shaack/es6-npm-toolkit.git"
+    "url": "git+https://github.com/shaack/web-module-curator.git"
   },
   "author": "https://shaack.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/shaack/es6-npm-toolkit/issues"
+    "url": "https://github.com/shaack/web-module-curator/issues"
   },
-  "homepage": "https://github.com/shaack/es6-npm-toolkit#readme"
+  "homepage": "https://github.com/shaack/web-module-curator#readme"
 }
