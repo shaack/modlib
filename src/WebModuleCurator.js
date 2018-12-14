@@ -14,7 +14,7 @@ module.exports = class WebModuleCurator {
         this.props = {
             nodeModulesPath: path.resolve(__dirname, '../../'), // path to `node_modules`
             projectLibFolder: "lib", // library folder where the module sources are linked/copied to
-            mode: "symlink" // set to "copy" to copy sources instead of symlinking
+            mode: "copy" // set to "symlink" to symlink sources instead of copying
         }
         Object.assign(this.props, props)
         if (!fs.existsSync(this.props.projectLibFolder)) {
@@ -42,13 +42,16 @@ module.exports = class WebModuleCurator {
             const fromRelative = path.relative(this.projectRoot + "/" + this.props.projectLibFolder, fromAbsolute)
             const toRelative = "./" + this.props.projectLibFolder + "/" + moduleSource
             console.log("Adding", fromRelative, "=>", toRelative, "(" + type + ")")
-            fs.unlink(toRelative, () => {
-                if (this.props.mode === "copy") {
-                    this.copySync(fromAbsolute, toRelative)
-                } else {
-                    fs.symlinkSync(fromRelative, toRelative, type)
-                }
-            })
+            if (fs.existsSync(toRelative)) {
+                this.deleteSync(toRelative)
+            }
+            if (this.props.mode === "copy") {
+                this.copySync(fromAbsolute, toRelative)
+            } else if (this.props.mode === "symlink") {
+                fs.symlinkSync(fromRelative, toRelative, type)
+            } else {
+                console.error("Unknown mode", this.props.mode)
+            }
         } catch (e) {
             console.error(e.message)
         }
@@ -59,16 +62,10 @@ module.exports = class WebModuleCurator {
      * @param source
      * @param destination
      */
-    copySync(source, destination, overwrite = true) {
-        if(overwrite) {
-            if (fs.existsSync(destination)) {
-                this.deleteSync(destination)
-            }
-        }
+    copySync(source, destination) {
         const exists = fs.existsSync(source)
         const stats = exists && fs.statSync(source)
-        const isDirectory = exists && stats.isDirectory()
-        if (isDirectory) {
+        if (stats.isDirectory()) {
             fs.mkdirSync(destination)
             fs.readdirSync(source).forEach((childItemName) => {
                 this.copySync(path.join(source, childItemName), path.join(destination, childItemName))
@@ -84,10 +81,9 @@ module.exports = class WebModuleCurator {
      */
     deleteSync(path) {
         const exists = fs.existsSync(path)
-        const stats = exists && fs.statSync(path)
-        const isDirectory = exists && stats.isDirectory()
-        if (isDirectory) {
-            fs.readdirSync(path).forEach((file, index) => {
+        const stats = exists && fs.lstatSync(path)
+        if (stats.isDirectory() && !stats.isSymbolicLink()) {
+            fs.readdirSync(path).forEach((file) => {
                 var curPath = path + "/" + file
                 if (fs.lstatSync(curPath).isDirectory()) {
                     this.deleteSync(curPath)
@@ -97,7 +93,7 @@ module.exports = class WebModuleCurator {
             })
             fs.rmdirSync(path)
         } else {
-            fs.unlinkSync(curPath)
+            fs.unlinkSync(path)
         }
     }
 
