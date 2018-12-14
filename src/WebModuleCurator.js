@@ -9,6 +9,11 @@ const fs = require('fs')
 
 module.exports = class WebModuleCurator {
 
+    /**
+     * Create a curator
+     * @param projectRoot Your project root, mostly `__dirname`
+     * @param props Configuration properties
+     */
     constructor(projectRoot, props) {
         this.projectRoot = projectRoot
         this.props = {

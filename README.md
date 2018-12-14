@@ -27,19 +27,40 @@ curator.addModule("npm-module-name-2");
 // [..]
 ```
 
+The module sources will be copied from the `node_modules` to a `lib` folder for easy handling of
+the relative include path from es6 modules. It's hard to explain, but it works. ;) 
+
 ## API
 
-### constructor WebModuleCurator
+### constructor
 
 ```js
+/**
+ * Create a curator
+ * @param projectRoot Your project root, mostly `__dirname`
+ * @param props Configuration properties
+ */
 WebModuleCurator(projectRoot, props)
+```
 
-// default props:
+Default props
+
+```js
 props = {
     nodeModulesPath: path.resolve(__dirname, '../../'), // path to `node_modules`
     projectLibFolder: "lib", // library folder where the module sources are linked/copied to
     mode: "copy" // set to "symlink" to symlink sources instead of copying
 }
+```
 
+### addModule
 
+```js
+/**
+ * Add a module to the library
+ * @param moduleName Name of the module
+ * @param moduleSourceRoot  The source root inside the module folder
+ * @param moduleSource The module source folder or file inside the 'moduleSourceRoot'
+ */
+addModule(moduleName, moduleSourceRoot = "src", moduleSource = moduleName)
 ```
