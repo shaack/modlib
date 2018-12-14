@@ -40,13 +40,13 @@ module.exports = class WebModuleCurator {
                 console.error("Not found: " + fromAbsolute)
             }
             const fromRelative = path.relative(this.projectRoot + "/" + this.props.projectLibFolder, fromAbsolute)
-            const to = "./" + this.props.projectLibFolder + "/" + moduleSource
-            console.log("Linking", fromRelative, "=>", to, "(" + type + ")")
-            fs.unlink(to, () => {
+            const toRelative = "./" + this.props.projectLibFolder + "/" + moduleSource
+            console.log("Adding", fromRelative, "=>", toRelative, "(" + type + ")")
+            fs.unlink(toRelative, () => {
                 if (this.props.mode === "copy") {
-                    this.copySync(fromAbsolute, to)
+                    this.copySync(fromAbsolute, toRelative)
                 } else {
-                    fs.symlinkSync(fromRelative, to, type)
+                    fs.symlinkSync(fromRelative, toRelative, type)
                 }
             })
         } catch (e) {
@@ -55,11 +55,16 @@ module.exports = class WebModuleCurator {
     }
 
     /**
-     * Recursive copy of a folder or file
+     * Recursive copy a folder or file
      * @param source
      * @param destination
      */
-    copySync(source, destination) {
+    copySync(source, destination, overwrite = true) {
+        if(overwrite) {
+            if (fs.existsSync(destination)) {
+                this.deleteSync(destination)
+            }
+        }
         const exists = fs.existsSync(source)
         const stats = exists && fs.statSync(source)
         const isDirectory = exists && stats.isDirectory()
@@ -70,6 +75,29 @@ module.exports = class WebModuleCurator {
             })
         } else {
             fs.copyFileSync(source, destination)
+        }
+    }
+
+    /**
+     * Recursive delete a folder or file
+     * @param path
+     */
+    deleteSync(path) {
+        const exists = fs.existsSync(path)
+        const stats = exists && fs.statSync(path)
+        const isDirectory = exists && stats.isDirectory()
+        if (isDirectory) {
+            fs.readdirSync(path).forEach((file, index) => {
+                var curPath = path + "/" + file
+                if (fs.lstatSync(curPath).isDirectory()) {
+                    this.deleteSync(curPath)
+                } else {
+                    fs.unlinkSync(curPath)
+                }
+            })
+            fs.rmdirSync(path)
+        } else {
+            fs.unlinkSync(curPath)
         }
     }
 
