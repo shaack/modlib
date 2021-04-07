@@ -1,19 +1,19 @@
 {
-  "name": "web-module-curator",
+  "name": "modrator",
   "version": "1.1.4",
   "description": "Tool functions to use ES6 modules as npm packages without transpiling ",
-  "main": "src/WebModuleCurator.js",
+  "main": "src/Modrator.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shaack/web-module-curator.git"
+    "url": "git+https://github.com/shaack/modrator.git"
   },
   "author": "https://shaack.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/shaack/web-module-curator/issues"
+    "url": "https://github.com/shaack/modrator/issues"
   },
-  "homepage": "https://github.com/shaack/web-module-curator#readme"
+  "homepage": "https://github.com/shaack/modrator#readme"
 }
