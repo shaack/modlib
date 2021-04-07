@@ -30,7 +30,7 @@ module.exports = class Modrator {
 
     /**
      * Add the modules of a node package to the library
-     * @param packageName Name of the nmp package
+     * @param packageName Name of the npm package
      * @param projectSourceRoot The source root inside the package folder
      * @param fileOrFolder The module source folder or file inside the 'projectSourceRoot'
      */
