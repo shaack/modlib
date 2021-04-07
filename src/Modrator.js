@@ -18,23 +18,23 @@ module.exports = class Modrator {
         this.projectRoot = projectRoot
         this.props = {
             nodeModulesPath: path.resolve(__dirname, '../../'), // path to `node_modules`
-            webModulesFolder: "lib", // library folder where the module sources are copied or linked to
+            libraryFolder: "lib", // library folder where the module sources are copied or linked to
             mode: "copy" // set to "symlink" to symlink sources instead of copying
         }
         Object.assign(this.props, props)
-        if (!fs.existsSync(this.props.webModulesFolder)) {
-            console.log("mkdir", this.props.webModulesFolder)
-            fs.mkdirSync(this.props.webModulesFolder)
+        if (!fs.existsSync(this.props.libraryFolder)) {
+            console.log("mkdir", this.props.libraryFolder)
+            fs.mkdirSync(this.props.libraryFolder)
         }
     }
 
     /**
      * Add the modules of a node package to the library
-     * @param packageName Name of the project
-     * @param projectSourceRoot The source root inside the module folder
+     * @param packageName Name of the nmp package
+     * @param projectSourceRoot The source root inside the package folder
      * @param fileOrFolder The module source folder or file inside the 'projectSourceRoot'
      */
-    addModules(packageName, projectSourceRoot = "src", fileOrFolder = packageName) {
+    addToLibrary(packageName, projectSourceRoot = "src", fileOrFolder = packageName) {
         let type = "dir"
         if (fileOrFolder.endsWith(".js")) {
             type = "file"
@@ -44,8 +44,8 @@ module.exports = class Modrator {
             if (!fs.existsSync(fromAbsolute)) {
                 console.error("Not found: " + fromAbsolute)
             }
-            const fromRelative = path.relative(this.projectRoot + "/" + this.props.webModulesFolder, fromAbsolute)
-            const toRelative = "./" + this.props.webModulesFolder + "/" + fileOrFolder
+            const fromRelative = path.relative(this.projectRoot + "/" + this.props.libraryFolder, fromAbsolute)
+            const toRelative = "./" + this.props.libraryFolder + "/" + fileOrFolder
             console.log("Adding", fromRelative, "=>", toRelative, "(" + type + ")")
             if (fs.existsSync(toRelative)) {
                 this.deleteSync(toRelative)
