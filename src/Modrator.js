@@ -1,6 +1,6 @@
 /**
  * Author and copyright: Stefan Haack (https://shaack.com)
- * Repository: https://github.com/shaack/web-module-curator
+ * Repository: https://github.com/shaack/modrator
  * License: MIT, see file 'LICENSE'
  */
 
@@ -29,18 +29,18 @@ module.exports = class Modrator {
     }
 
     /**
-     * Add the modules of a project to the library
-     * @param projectName Name of the project
+     * Add the modules of a node package to the library
+     * @param packageName Name of the project
      * @param projectSourceRoot The source root inside the module folder
      * @param fileOrFolder The module source folder or file inside the 'projectSourceRoot'
      */
-    addProject(projectName, projectSourceRoot = "src", fileOrFolder = projectName) {
+    addModules(packageName, projectSourceRoot = "src", fileOrFolder = packageName) {
         let type = "dir"
         if (fileOrFolder.endsWith(".js")) {
             type = "file"
         }
         try {
-            const fromAbsolute = this.props.nodeModulesPath + "/" + projectName + "/" + projectSourceRoot + "/" + fileOrFolder
+            const fromAbsolute = this.props.nodeModulesPath + "/" + packageName + "/" + projectSourceRoot + "/" + fileOrFolder
             if (!fs.existsSync(fromAbsolute)) {
                 console.error("Not found: " + fromAbsolute)
             }

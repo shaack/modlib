@@ -1,19 +1,20 @@
 # Modrator
 
-Use es6 modules from npm in webapps without transpiling. 
+Use es6 modules from npm in webapps without transpiling.
 
 Modrator is tool class, to create a library out of the ES6 modules of `node_modules`
 to use them in web apps.
 
 ## The problem
 
-**ES6 modules includes are always relative** if the modules are not transpiled. So if you have a portion of the modules in 
+**ES6 modules includes are always relative** if the modules are not transpiled. So if you have a portion of the modules
+in
 `/node_modules` via npm and implement another portion under `/src`, the modules cannot link relatively.
 
 ## The solution
 
-**Modrator** solves the problem by copying the sources from `node_modules` to a `web_modules` folder, so that an include on
-external dependencies is always found under "../../web_modules", regardless of whether the code is in `/src`
+**Modrator** solves the problem by copying the sources from `node_modules` to a `web_modules` folder, so that an include
+on external dependencies is always found under "../../web_modules", regardless of whether the code is in `/src`
 or `/web_modules`.
 
 ## Usage
@@ -23,28 +24,26 @@ Modrator is mainly used in `postinstall.js`.
 ```js
 // Create an instance of the `WebModuleCurator` in your `postinstall.js`:
 
-const WebModuleCurator = require("web-module-curator")
-const curator = new WebModuleCurator(__dirname) // parameter projectRoot
+const Modrator = require("modrator")
+const modrator = new Modrator()
 
-// Then add Modules:
+// Then add modules from projects:
 
-curator.addModule("npm-module-name-1");
-curator.addModule("npm-module-name-2");
+modrator.addProject("npm-project-name-1")
+modrator.addProject("npm-project-name-2")
 // [..]
 ```
 
-The module sources will be copied from the `node_modules` to a `web_modules` folder for easy handling of the relative include
-path from es6 modules.
+The module sources will be copied from the `node_modules` to a `web_modules` folder for easy handling of the relative
+include path from es6 modules.
 
 ## Examples
 
-It works in these plain es6 module based apps, 
-which must not be transpiled or compiled to run:
+It works in these plain es6 module based apps, which must not be transpiled or compiled to run:
 
 - [cm-chessboard](https://shaack.com/projekte/cm-chessboard/)
 - [cm-web-modules](https://shaack.com/projekte/cm-web-modules/)
 - [chess-console](https://shaack.com/projekte/chess-console/examples/game-with-random.html)
-
 
 ## API
 
@@ -52,11 +51,11 @@ which must not be transpiled or compiled to run:
 
 ```js
 /**
- * Create a curator
+ * Create the Modrator
  * @param projectRoot Your project root, mostly `__dirname`
  * @param props Configuration properties
  */
-WebModuleCurator(projectRoot, props)
+constructor(projectRoot = __dirname, props = {})
 ```
 
 Default props
@@ -69,14 +68,14 @@ props = {
 }
 ```
 
-### addProject
+### addModules
 
 ```js
 /**
- * Add the modules of a project to the library
- * @param projectName Name of the project
+ * Add the modules of a node package to the library
+ * @param packageName Name of the project
  * @param projectSourceRoot The source root inside the module folder
  * @param fileOrFolder The module source folder or file inside the 'projectSourceRoot'
  */
-addProject(projectName, projectSourceRoot = "src", fileOrFolder = projectName)
+addModules(packageName, projectSourceRoot = "src", fileOrFolder = packageName)
 ```
