@@ -1,6 +1,4 @@
-DEPRECATED! use https://github.com/shaack/cm-web-modules/blob/master/src/LibraryManager.js instead
-
-# web-module-curator
+# Modrator
 
 Use es6 modules from npm in webapps without transpiling.
 
