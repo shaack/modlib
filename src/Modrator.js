@@ -10,11 +10,11 @@ const fs = require('fs')
 module.exports = class Modrator {
 
     /**
-     * Create a Modrator
+     * Create the Modrator
      * @param projectRoot Your project root, mostly `__dirname`
      * @param props Configuration properties
      */
-    constructor(projectRoot, props) {
+    constructor(projectRoot = __dirname, props = {}) {
         this.projectRoot = projectRoot
         this.props = {
             nodeModulesPath: path.resolve(__dirname, '../../'), // path to `node_modules`
@@ -32,20 +32,20 @@ module.exports = class Modrator {
      * Add the modules of a project to the library
      * @param projectName Name of the project
      * @param projectSourceRoot The source root inside the module folder
-     * @param subfolder The module source folder or file inside the 'projectSourceRoot'
+     * @param fileOrFolder The module source folder or file inside the 'projectSourceRoot'
      */
-    addProject(projectName, projectSourceRoot = "src", subfolder = projectName) {
+    addProject(projectName, projectSourceRoot = "src", fileOrFolder = projectName) {
         let type = "dir"
-        if (subfolder.endsWith(".js")) {
+        if (fileOrFolder.endsWith(".js")) {
             type = "file"
         }
         try {
-            const fromAbsolute = this.props.nodeModulesPath + "/" + projectName + "/" + projectSourceRoot + "/" + subfolder
+            const fromAbsolute = this.props.nodeModulesPath + "/" + projectName + "/" + projectSourceRoot + "/" + fileOrFolder
             if (!fs.existsSync(fromAbsolute)) {
                 console.error("Not found: " + fromAbsolute)
             }
             const fromRelative = path.relative(this.projectRoot + "/" + this.props.webModulesFolder, fromAbsolute)
-            const toRelative = "./" + this.props.webModulesFolder + "/" + subfolder
+            const toRelative = "./" + this.props.webModulesFolder + "/" + fileOrFolder
             console.log("Adding", fromRelative, "=>", toRelative, "(" + type + ")")
             if (fs.existsSync(toRelative)) {
                 this.deleteSync(toRelative)
