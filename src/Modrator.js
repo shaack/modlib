@@ -18,7 +18,7 @@ module.exports = class Modrator {
         this.projectRoot = projectRoot
         this.props = {
             nodeModulesPath: path.resolve(__dirname, '../../'), // path to `node_modules`
-            webModulesFolder: "web_modules", // library folder where the module sources are linked/copied to
+            webModulesFolder: "lib", // library folder where the module sources are copied or linked to
             mode: "copy" // set to "symlink" to symlink sources instead of copying
         }
         Object.assign(this.props, props)

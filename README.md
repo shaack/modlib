@@ -64,19 +64,19 @@ Default props
 ```js
 props = {
     nodeModulesPath: path.resolve(__dirname, '../../'), // path to `node_modules`
-    webModulesFolder: "web_modules", // library folder where the module sources are linked/copied to
+    webModulesFolder: "lib", // library folder where the module sources are linked/copied to
     mode: "copy" // set to "symlink" to symlink sources instead of copying
 }
 ```
 
-### addModule
+### addProject
 
 ```js
 /**
- * Add a module to the library
- * @param moduleName Name of the module
- * @param moduleSourceRoot  The source root inside the module folder
- * @param moduleSource The module source folder or file inside the 'moduleSourceRoot'
+ * Add the modules of a project to the library
+ * @param projectName Name of the project
+ * @param projectSourceRoot The source root inside the module folder
+ * @param fileOrFolder The module source folder or file inside the 'projectSourceRoot'
  */
-addModule(moduleName, moduleSourceRoot = "src", moduleSource = moduleName)
+addProject(projectName, projectSourceRoot = "src", fileOrFolder = projectName)
 ```
