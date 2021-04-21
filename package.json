@@ -2,7 +2,7 @@
   "name": "modrator",
   "version": "1.1.9",
   "description": "Tool functions to use ES6 modules as npm packages without transpiling ",
-  "main": "src/Modrator.js",
+  "main": "src/ModRator.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

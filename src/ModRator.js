@@ -7,7 +7,7 @@
 const path = require('path')
 const fs = require('fs')
 
-module.exports = class Modrator {
+module.exports = class ModRator {
 
     /**
      * Create the Modrator
