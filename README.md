@@ -1,4 +1,4 @@
-# Modrator
+# ModRator
 
 Use es6 modules from npm in webapps without transpiling.
 
