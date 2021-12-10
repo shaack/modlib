@@ -1,6 +1,6 @@
 {
   "name": "modrator",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Tool functions to use ES6 modules as npm packages without transpiling ",
   "main": "src/ModRator.js",
   "scripts": {
