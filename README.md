@@ -2,7 +2,7 @@
 
 Use es6 modules from npm in webapps without transpiling.
 
-Modrator is tool class, to create a library out of the ES6 modules of `node_modules`
+Modrator is a tool class, to create a library out of the ES6 modules of `node_modules`
 to use them in web apps.
 
 ## The problem
