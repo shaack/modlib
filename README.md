@@ -41,9 +41,9 @@ include path from es6 modules.
 
 It works in these plain es6 module based apps, which must not be transpiled or compiled to run:
 
-- [cm-web-modules](https://shaack.com/projekte/cm-web-modules/)
 - [cm-chessboard](https://shaack.com/projekte/cm-chessboard/)
 - [chess-console](https://shaack.com/projekte/chess-console/examples/game-with-random.html)
+- [cm-web-modules](https://github.com/shaack/cm-web-modules)
 
 ## API
 
