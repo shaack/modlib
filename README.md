@@ -1,8 +1,8 @@
-# ModRator
+# Modlib
 
 Use es6 modules from npm in webapps without transpiling.
 
-Modrator is a tool class, to create a library out of the ES6 modules of `node_modules`
+Modlib is a tool class, to create a library out of the ES6 modules of `node_modules`
 to use them in web apps.
 
 ## The problem
@@ -19,18 +19,18 @@ or `/web_modules`.
 
 ## Usage
 
-Modrator is mainly used in `postinstall.js`.
+Modlib is mainly used in `postinstall.js`.
 
 ```js
 // Create an instance of `Modrator` in your `postinstall.js`:
 
-const Modrator = require("modrator")
-const modrator = new Modrator()
+const Modlib = require("modlib")
+const modlib = new Modlib()
 
 // Then add modules from packages
 
-modrator.addToLibrary("npm-package-name-1")
-modrator.addToLibrary("npm-package-name-2")
+modlib.addToLibrary("npm-package-name-1")
+modlib.addToLibrary("npm-package-name-2")
 // [..]
 ```
 
