@@ -1,8 +1,8 @@
-# Modlib
+# ModLib
 
 Use es6 modules from npm in webapps without transpiling.
 
-Modlib is a tool class, to create a library out of the ES6 modules of `node_modules`
+ModLib is a tool class, to create a library out of the ES6 modules of `node_modules`
 to use them in web apps.
 
 ## The problem
@@ -19,13 +19,13 @@ or `/web_modules`.
 
 ## Usage
 
-Modlib is mainly used in `postinstall.js`.
+ModLib is mainly used in `postinstall.js`.
 
 ```js
 // Create an instance of `Modrator` in your `postinstall.js`:
 
-const Modlib = require("modlib")
-const modlib = new Modlib()
+const ModLib = require("modlib")
+const modLib = new ModLib()
 
 // Then add modules from packages
 

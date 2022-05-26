@@ -1,19 +1,19 @@
 {
-  "name": "modrator",
+  "name": "modlib",
   "version": "1.2.1",
   "description": "Tool functions to use ES6 modules as npm packages without transpiling ",
-  "main": "src/ModRator.js",
+  "main": "src/ModLib.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shaack/modrator.git"
+    "url": "git+https://github.com/shaack/modlib.git"
   },
   "author": "https://shaack.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/shaack/modrator/issues"
+    "url": "https://github.com/shaack/modlib/issues"
   },
-  "homepage": "https://github.com/shaack/modrator#readme"
+  "homepage": "https://github.com/shaack/modlib#readme"
 }

@@ -1,13 +1,13 @@
 /**
  * Author and copyright: Stefan Haack (https://shaack.com)
- * Repository: https://github.com/shaack/modrator
+ * Repository: https://github.com/shaack/modlib
  * License: MIT, see file 'LICENSE'
  */
 
 const path = require('path')
 const fs = require('fs')
 
-module.exports = class ModRator {
+module.exports = class ModLib {
 
     /**
      * Create the Modrator
