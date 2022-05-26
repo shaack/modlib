@@ -34,7 +34,7 @@ module.exports = class ModLib {
      * @param projectSourceRoot The source root inside the package folder
      * @param fileOrFolder The module source folder or file inside the 'projectSourceRoot'
      */
-    addToLibrary(packageName, projectSourceRoot = "src", fileOrFolder = packageName) {
+    add(packageName, projectSourceRoot = "src", fileOrFolder = packageName) {
         let type = "dir"
         if (fileOrFolder.endsWith(".js")) {
             type = "file"
