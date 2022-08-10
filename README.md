@@ -13,8 +13,8 @@ in
 
 ## The solution
 
-**ModLib** solves the problem by copying the sources from `node_modules` to a `web_modules` folder, so that an include
-on external dependencies is always found under "../../web_modules", regardless of whether the code is in `/src`
+**ModLib** solves the problem by copying the sources from `node_modules` to a `lib` folder, so that an include
+on external dependencies is always found in a relative path under "../../lib", regardless of whether the code is in `/src`
 or `/web_modules`.
 
 ## Usage
@@ -29,8 +29,8 @@ const modLib = new ModLib()
 
 // Then add modules from packages
 
-modlib.addToLibrary("npm-package-name-1")
-modlib.addToLibrary("npm-package-name-2")
+modLib.add("npm-package-name-1")
+modLib.add("npm-package-name-2")
 // [..]
 ```
 
