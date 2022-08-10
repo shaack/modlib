@@ -13,7 +13,7 @@ in
 
 ## The solution
 
-**Modrator** solves the problem by copying the sources from `node_modules` to a `web_modules` folder, so that an include
+**ModLib** solves the problem by copying the sources from `node_modules` to a `web_modules` folder, so that an include
 on external dependencies is always found under "../../web_modules", regardless of whether the code is in `/src`
 or `/web_modules`.
 
