@@ -22,7 +22,7 @@ whether the code is in `/src` or `/lib`.
 ModLib is mainly used in `postinstall.js`.
 
 ```js
-// Create an instance of `Modrator` in your `postinstall.js`:
+// Create an instance of `ModLib` in your `postinstall.js`:
 
 const ModLib = require("modlib")
 const modLib = new ModLib()
@@ -34,7 +34,7 @@ modLib.add("npm-package-name-2")
 // [..]
 ```
 
-The module sources will be copied from the `node_modules` to the `lib` folder for easy handling of the relative
+The module sources will be copied from the `node_modules/package/src/*` to the `lib/package/*` folder for easy handling of the relative
 include path from es6 modules.
 
 ## Examples
