@@ -13,9 +13,9 @@ in
 
 ## The solution
 
-**ModLib** solves the problem by copying the sources from `node_modules` to a `lib` folder, so that an include
-on external dependencies is always found in a relative path, regardless of whether the code is in `/src`
-or `/web_modules`.
+**ModLib** solves the problem by copying the sources from `/node_modules` to a `/lib` folder, so that an include
+on external dependencies is always found in a relative path as `../../lib/module-name/src/File.js`, regardless of
+whether the code is in `/src` or `/lib`.
 
 ## Usage
 
