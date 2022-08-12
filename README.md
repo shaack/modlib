@@ -5,17 +5,16 @@ Use es6 modules from npm in webapps without transpiling.
 ModLib is a tool class, to create a library out of the ES6 modules of `node_modules`
 to use them in web apps.
 
-## The problem
+## The problem with ES6 and npm in web projects
 
-**ES6 modules includes are always relative** if the modules are not transpiled. So if you have a portion of the modules
-in
-`/node_modules` via npm and implement another portion under `/src`, the modules cannot link relatively.
+Let's assume we have two ES6 projects. "cm-main" and "cm-dependency" with the following structure:
+`cm-main/src/Main.js` and `cm-dependency/src/Dependency.js`.
 
-## The solution
+When developing "cm-main" the import path from `src/Main.js` to `node_modules/cm-dependency/src/Dependency.js` would be `../node_modules/cm-dependency/src/Dependency.js` but later when both are npm packages, they are both in node_modules and then the import path will become `../../cm-dependency/Dependency.js`. Because of that importing files from node_modules does not work for ES6 web-projects.
 
-**ModLib** solves the problem by copying the sources from `/node_modules` to a `/lib` folder, so that an include
-on external dependencies is always found in a relative path as `../../lib/module-name/File.js`, regardless of
-whether the code is in `/src` or `/lib`.
+## The solution (without transpiling)
+
+When we copy `node_modules/cm-dependency/src/Dependency.js` to `lib/Dependency.js` on `npm install`, the include path for local development from `src/Main.js` will be `../lib/Dependency.js`. Later, when both are npm packages, the import path from `lib/Main.js` will remain `../lib/Dependency.js`. 👍
 
 ## Usage
 
@@ -34,20 +33,20 @@ modLib.add("npm-package-name-2")
 // [..]
 ```
 
-The module sources will be copied from the `node_modules/package/src/*` to the `lib/package/*` folder for easy handling of the relative
-include path from es6 modules.
+The module sources will be copied from the `node_modules/package/src/*` to the `lib/package/*` folder for easy handling of the relative import path from ES6 modules.
 
 ## Examples
 
-It works in these plain es6 module based apps, which must not be transpiled or compiled to run:
+It works in these plain ES6 module based apps, which must not be transpiled or compiled to run.
 
-- [cm-chessboard](https://shaack.com/projekte/cm-chessboard/)
-- [chess-console](https://shaack.com/projekte/chess-console/examples/game-with-random.html)
-- [cm-web-modules](https://github.com/shaack/cm-web-modules)
+- [cm-chess](https://github.com/shaack/cm-chess)
+- [cm-fen-editor](https://github.com/shaack/cm-fen-editor)
+- [chess-console](https://github.com/shaack/chess-console)
+- [chess-console-stockfish](https://github.com/shaack/chess-console-stockfish)
 
 ## API
 
-### constructor
+### constructorwww
 
 ```js
 /**
