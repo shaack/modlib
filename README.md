@@ -14,7 +14,7 @@ When developing "cm-main" the import path from `src/Main.js` to `node_modules/cm
 
 ## The solution (without transpiling)
 
-When we copy `node_modules/cm-dependency/src/Dependency.js` to `lib/Dependency.js` on `npm install`, the include path for local development from `src/Main.js` will be `../lib/Dependency.js`. Later, when both are npm packages, the import path from `lib/Main.js` will remain `../lib/Dependency.js`. 👍
+When we copy `node_modules/cm-dependency/src/Dependency.js` to `lib/Dependency.js` on `npm install`, the include path for local development from `src/Main.js` will be `../lib/Dependency.js`. And later, when both are npm packages, the import path from `lib/Main.js` will remain `../lib/Dependency.js`. 👍
 
 ## Usage
 
@@ -33,11 +33,18 @@ modLib.add("npm-package-name-2")
 // [..]
 ```
 
-The module sources will be copied from the `node_modules/package/src/*` to the `lib/package/*` folder for easy handling of the relative import path from ES6 modules.
+The module sources will be copied from the `node_modules/package/src/*` to the `lib/package/*` folder for easy handling of the relative import path from other ES6 modules.
+
+Auto execute `postinstall.js` on `npm install` with adding it to your `package.json` like so
+```json
+"scripts": {
+  "postinstall": "node postinstall.js"
+}
+```
 
 ## Examples
 
-It works in these plain ES6 module based apps, which must not be transpiled or compiled to run.
+It works in these plain ES6 module based apps and components, which must not be transpiled or compiled to run. They work out of the box without transpiling, without babel.
 
 - [cm-chess](https://github.com/shaack/cm-chess)
 - [cm-fen-editor](https://github.com/shaack/cm-fen-editor)
@@ -46,7 +53,7 @@ It works in these plain ES6 module based apps, which must not be transpiled or c
 
 ## API
 
-### constructorwww
+### constructor
 
 ```js
 /**
@@ -67,7 +74,7 @@ props = {
 }
 ```
 
-### addToLibrary
+### method `add` to a package to the library
 
 ```js
 /**
@@ -76,5 +83,5 @@ props = {
  * @param projectSourceRoot The source root inside the package folder
  * @param fileOrFolder The module source folder or file inside the 'projectSourceRoot'
  */
-addToLibrary(packageName, projectSourceRoot = "src", fileOrFolder = packageName)
+add(packageName, projectSourceRoot = "src", fileOrFolder = packageName)
 ```
