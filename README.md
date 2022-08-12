@@ -1,8 +1,8 @@
 # ModLib
 
-Use es6 modules from npm in webapps without transpiling.
+Use ES6 modules from npm in webapps without transpiling.
 
-ModLib is a tool class, to create a library out of the ES6 modules of `node_modules`
+ModLib is a tool class, to create a library out of the ES6 modules of `node_modules` packages
 to use them in web apps.
 
 ## The problem with ES6 and npm in web projects
