@@ -23,8 +23,7 @@ ModLib is mainly used in `postinstall.js`.
 ```js
 // Create an instance of `ModLib` in your `postinstall.js`:
 
-const ModLib = require("modlib")
-const modLib = new ModLib()
+const modLib = new (require("modlib"))
 
 // Then add modules from packages
 
