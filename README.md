@@ -56,7 +56,6 @@ It works in these plain ES6 module based apps and components, which must not be 
 
 ```js
 /**
- * Create the Modrator
  * @param projectRoot Your project root, mostly `__dirname`
  * @param props Configuration properties
  */

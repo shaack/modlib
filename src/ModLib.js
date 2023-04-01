@@ -10,7 +10,6 @@ const fs = require('fs')
 module.exports = class ModLib {
 
     /**
-     * Create the Modrator
      * @param projectRoot Your project root, mostly `__dirname`
      * @param props Configuration properties
      */
