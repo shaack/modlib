@@ -18,10 +18,10 @@ When we copy `node_modules/cm-dependency/src/Dependency.js` to `lib/Dependency.j
 
 ## Usage
 
-ModLib is mainly used in `postinstall.js`.
+ModLib is mainly used in `postinstall.cjs`.
 
 ```js
-// Create an instance of `ModLib` in your `postinstall.js`:
+// Create an instance of `ModLib` in your `postinstall.cjs`:
 
 const modLib = new (require("modlib"))
 
@@ -34,10 +34,10 @@ modLib.add("npm-package-name-2")
 
 The module sources will be copied from the `node_modules/package/src/*` to the `lib/package/*` folder for easy handling of the relative import path from other ES6 modules.
 
-Auto execute `postinstall.js` on `npm install` with adding it to your `package.json` like so
+Auto execute `postinstall.cjs` on `npm install` with adding it to your `package.json` like so
 ```json
 "scripts": {
-  "postinstall": "node postinstall.js"
+  "postinstall": "node postinstall.cjs"
 }
 ```
 
